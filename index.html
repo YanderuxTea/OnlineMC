@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мониторинг Minecraft серверов</title>
+    <link rel="icon" type="icon/x-icon" href="icon.ico">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="background-loader" id="background-loader">
+        <div class="loader" id="loader">
+            <span class="round-loader" id="round-loader"></span>
+        </div>
+    </div>
+    <div class="notify" id="notify"></div>
+    <div class="modalwindow" id="modal">
+        <div class="mainmodal" id="mainmodal">
+            <div class="exitmodal">
+                <a class="exit" id="exit" onclick="closemodal()">X</a>
+            </div>
+            <input class="ip" id="ip" placeholder="Введите IP или название сервера">
+            <button class="buttonmodal" id="buttonmodal">Проверить и добавить сервер</button>
+        </div>
+    </div>
+    <header>
+        <div class="left">
+            <a href="#" class="logo">OnlineMC</a>
+        </div>
+        <div class="right">
+            <label class="switchtheme" id="switchtheme">
+                <input type="checkbox" onchange="toggletheme()" id="checkboxtheme">
+                <span class="switch round"></span>
+            </label>
+            <button class="buttonaddserver" id="addserver">Добавить сервер</button>
+        </div>
+    </header>
+    <main>
+        <div class="searchdiv">
+            <input class="search" placeholder="Введите название сервера для поиска">
+            <button id="sorted" onclick="sorted()">Отсортировать по онлайну ▲/▼</button>
+        </div>
+        <div class="cardservers" id="cardservers">
+            <div class="empty-div" id="empty-div">
+                <p id="textcontent">Ваш список серверов пуст!</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Разработчик TeaWithSugar</p>
+    </footer>
+</body>
+<script src="script.js"></script>
+</html>

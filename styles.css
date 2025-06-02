@@ -1,0 +1,678 @@
+@font-face {
+    font-family: 'Monocraft';
+    src: url('Fonts/Monocraft.otf'), format('opentype');
+}
+@keyframes animloader {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+@keyframes animonline {
+    0%{
+        box-shadow: 0 0 10px 0 rgb(0, 221, 0);
+    }
+    50%{
+        box-shadow: 0 0 5px 0 rgb(0, 221, 0);
+    }
+    100%{
+        box-shadow: 0 0 15px 0 rgb(0, 221, 0);
+    }
+}
+@keyframes animoffline {
+    0%{
+        box-shadow: 0 0 10px 0 red;
+    }
+    50%{
+        box-shadow: 0 0 5px 0 red;
+    }
+    100%{
+        box-shadow: 0 0 15px 0 red;
+    }
+}
+
+.dark-theme{
+    --main-color-card: rgb(29, 29, 29);
+    --main-color-body: rgb(70, 70, 70);
+    --main-color: rgb(49, 49, 49);
+    --second-color: rgb(106, 0, 182);
+    --text-color: rgb(255, 255, 255);
+    --placeholder-color: rgb(173, 173, 173);
+    --succesful-color: rgb(0, 180, 0);
+    --error-color: rgb(177, 0, 0);
+    --border-color: rgb(71, 0, 122);
+    --button-color: rgb(255, 85, 33);
+    --shadow-color: rgb(87, 55, 230);
+    --search-color: rgb(78, 78, 78);
+}
+.light-theme{
+    --main-color-card: rgb(117, 117, 117);
+    --main-color-body: rgb(237, 239, 240);
+    --main-color: rgb(255, 255, 255);
+    --second-color: rgb(106, 0, 182);
+    --text-color: rgb(0, 0, 0);
+    --placeholder-color: rgb(119, 119, 119);
+    --succesful-color: rgb(0, 180, 0);
+    --error-color: rgb(177, 0, 0);
+    --border-color: rgb(71, 0, 122);
+    --button-color: rgb(255, 85, 33);
+    --shadow-color: rgb(39, 39, 39);
+    --search-color: rgb(223, 223, 223);
+}
+a{
+    text-decoration: none;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    flex:1;
+    font-family: 'Monocraft', sans-serif;
+    background-color: var(--main-color-body);
+    transition: all 0.3s ease-in-out;
+}
+html{
+    user-select: none;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    width: 80%;
+    height: 40px;
+    background-color: var(--second-color);
+    border-radius: 10px;
+    color: var(--text-color);
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 10px 0 var(--border-color);
+    transition: all 0.3s ease-in-out;
+}
+.right{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+.logo{
+    color: white;
+    font-size: 20px;
+    transition: all 0.3s ease-in-out;
+}
+.logo:hover{
+    text-shadow: rgb(255, 255, 255) 0 0 10px;
+}
+.buttonaddserver{
+    font-family: 'Monocraft', sans-serif;
+    background-color: var(--button-color);
+    border: 0;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: white;
+    box-shadow: 0 0 10px 0 var(--button-color);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.buttonaddserver:hover{
+    box-shadow: 0 0 15px 0 var(--button-color);
+    transform: translateY(-2px);
+}
+.switchtheme input{
+    display: none;
+}
+.switchtheme{
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 30px;
+    z-index: 3;
+}
+.switch{
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: gray;
+    box-shadow: 0 0 10px 0 var(--shadow-color);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    z-index: 3;
+}
+.switch::before{
+    position: absolute;
+    content: "";
+    height: 40px;
+    width: 40px;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    background-image: url('img/light.png');
+    background-repeat: no-repeat;
+    background-color: white;
+    background-position: center;
+    margin: auto 0;
+    transition: all 0.3s;
+    cursor: pointer;
+    z-index: 3;
+}
+input:checked + .switch{
+    background-color: rgb(113, 113, 255);
+}
+input:checked + .switch::before{
+    transform: translateX(40px);
+    background-image: url('img/dark.png');
+}
+.switch.round{
+    border-radius: 32px;
+}
+.switch.round::before{
+    border-radius: 50%;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 80%;
+    height: 80%;
+    flex: 1;
+    background-color: var(--main-color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 20px 0 var(--border-color);
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 10px;
+}
+.searchdiv{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5%;
+    width: 100%;
+}
+.searchdiv input:focus{
+    outline: none;
+    box-shadow: 0 0 10px 0 var(--border-color);
+}
+.searchdiv input::placeholder{
+    color: var(--placeholder-color);
+    transition: all 0.3s ease-in-out;
+}
+.searchdiv input{
+    width: 82%;
+    height: 30px;
+    font-family: 'Monocraft', sans-serif;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background-color: var(--search-color);
+    color: var(--text-color);
+    transition: all 0.3s ease-in-out;
+}
+.searchdiv button{
+    height: 35px;
+    color: var(--text-color);
+    background-color: transparent;
+    border: none;
+    font-family: 'Monocraft', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.empty{
+    justify-content: center;
+}
+.exsited{
+    justify-content: none;
+}
+.cardservers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+    overflow-y: auto;
+    color: var(--text-color);
+    gap: 20px;
+}
+.cardservers::-webkit-scrollbar{
+    display: none;
+}
+.servercard{
+    display: flex;
+    align-items: center;
+    background-color: var(--main-color-card);
+    width: 70%;
+    height: 25%;
+    padding: 10px;
+    border-radius: 10px;
+    gap:10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 10px 0 var(--border-color);
+    margin-top: 10px;
+    cursor: move;
+    transition: all 0.3s ease-in-out;
+}
+
+.servercard img{
+    width: 128px;
+    height: 128px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 var(--border-color);
+}
+.status{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 128px;
+    gap: 10px;
+    padding: 10px;
+}
+.status p{
+    margin: 0;
+    height: max-content;
+}
+.divOnline{
+    display: flex;
+    gap:10px;
+    align-items: center;
+}
+.onlineText{
+    color: rgb(0, 221, 0);
+    text-shadow: rgb(0, 221, 0) 0 0 10px;
+}
+.online{
+    width: 18px;
+    height: 18px;
+    background-color: rgb(0, 221, 0);
+    animation: animonline 3s infinite alternate ease-in-out;
+    border-radius: 50%;
+}
+.offlineText{
+    color: red;
+    text-shadow:red 0 0 10px;
+}
+.offline{
+    width: 18px;
+    height: 18px;
+    background-color: red;
+    animation: animoffline 3s infinite alternate ease-in-out;
+    border-radius: 50%;
+}
+.hide{
+    display: none;
+}
+
+.nameserver{
+    background-color: transparent;
+    font-family: 'Monocraft', sans-serif;
+    font-size: 20px;
+    border: 0;
+    width: 100%;
+    color: white;
+    text-overflow: ellipsis;
+}
+.nameserver::placeholder{
+    color: white;
+    font-family: 'Monocraft', sans-serif;
+}
+.nameserver:focus{
+    outline: 0;
+}
+.online-count-text{
+    color: rgb(255, 208, 0);
+    text-shadow: rgb(255, 208, 0) 0 0 10px;
+}
+.version-text{
+    color: rgb(255, 153, 0);
+    text-shadow: rgb(255, 153, 0) 0 0 10px;
+}
+
+footer{
+    display: flex;
+    width: 80%;
+    height: 5%;
+    padding: 10px;
+    background-color: var(--second-color);
+    margin-top: 20px;
+    border-radius: 10px 10px 0 0;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 10px 0 var(--border-color);
+}
+footer p{
+    color: white;
+}
+.modal{
+    display: none;
+}
+.active{
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transition: all 0.3s ease-in-out;
+}
+.mainmodal{
+    display: none;
+    position: relative;
+    width: 50%;
+    height: 20%;
+    background-color: var(--main-color);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 10px 0 var(--border-color);
+}
+.activemodal{
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    gap:20px;
+    transition: all 0.3s ease-in-out;
+}
+.exitmodal{
+    display: flex;
+    justify-content: right;
+}
+.exit{
+    font-size: 20px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.exit:hover{
+    color: red;
+    text-shadow: red 0 0 10px ;
+}
+.ip{
+    height: 50px;
+    color: var(--text-color);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    font-family: 'Monocraft', sans-serif;
+    background-color: var(--search-color);
+    transition: all 0.3s ease-in-out;
+}
+.ip:focus{
+    outline: none;
+    box-shadow: 0 0 10px 0 var(--border-color);
+}
+.ip::placeholder{
+    color: var(--placeholder-color);
+}
+.buttonmodal{
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: var(--button-color);
+    box-shadow: 0 0 10px 0 var(--button-color);
+    font-family: 'Monocraft', sans-serif;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.buttonmodal:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px 0 var(--button-color);
+}
+.notify{
+    display: flex;
+    position: absolute;
+    border-radius: 10px;
+    color: white;
+    z-index: 1;
+    transform: translateY(-100px);
+    transition: all 0.3s ease-in-out;
+    padding: 10px;
+    z-index: 100;
+}
+
+.succesful{
+    background-color: var(--succesful-color);
+    box-shadow: 0 0 10px 0 var(--succesful-color);
+    transform: translateY(40px);
+}
+.error{
+    background-color: var(--error-color);
+    box-shadow: 0 0 10px 0 var(--error-color);
+    transform: translateY(40px);
+}
+.background-loader{
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 5;
+}
+.background-loader-active{
+    display: flex;
+}
+.loader{
+    position: relative;
+    display: inline-block;
+    width: 250px;
+    height: 250px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 black;
+}
+.round-loader{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.round-loader::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid white;
+    animation: animloader 2s linear infinite;
+}
+.ipptext{
+    text-shadow: rgb(255, 255, 255) 0 0 10px;
+    color: white;
+    cursor: pointer;
+    width: max-content;
+}
+
+.servercard.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+.div-buttons{
+    display: flex;
+    position: relative;
+    gap: 10px;
+    justify-content: right;
+    flex:1;
+    height: 100%;
+}
+.update-button, .delete-button{
+    padding: 10px;
+    border-radius: 10px;
+    font-family: 'Monocraft', sans-serif;
+    border: none;
+    color: white;
+    cursor: pointer;
+    height: 35px;
+    transition: all 0.3s;
+}
+.update-button{
+    background-color: var(--border-color);
+    box-shadow: 0 0 10px 0 var(--border-color);
+}
+.delete-button{
+    background-color: var(--error-color);
+    box-shadow: 0 0 10px 0 var(--error-color);
+}
+.update-button:hover, .delete-button:hover{
+    transform: translateY(-2px);
+}
+.update-button:hover{
+    box-shadow: 0 0 15px 0 var(--border-color);
+}
+.delete-button:hover{
+    box-shadow: 0 0 15px 0 var(--error-color);
+}
+@media(min-width: 3840px){
+    header{
+        height: 80px;
+    }
+    .logo{
+        font-size: 28px;
+    }
+    .switchtheme{
+        width: 120px;
+        height: 50px;
+    }
+    .switch::before{
+        width: 70px;
+        height: 70px;
+    }
+    input:checked + .switch::before{
+        transform: translateX(50px);
+    }
+    .buttonaddserver{
+        padding: 20px;
+        font-size: 20px;
+    }
+    .searchdiv input{
+        height: 50px;
+        font-size: 22px;
+    }
+    #sorted{
+        font-size: 22px;
+    }
+    .servercard img{
+        width: 200px;
+        height: 200px;
+    }
+    .nameserver{
+        font-size: 35px;
+    }
+    .status{
+        font-size: 25px;
+        height: 200px;
+    }
+    .update-button,.delete-button{
+        font-size: 25px;
+        height: 50px;
+    }
+    .ip{
+        height: 60px;
+        font-size: 25px;
+    }
+    .exit{
+        font-size: 30px;
+    }
+    .buttonmodal{
+        font-size: 25px;
+        height: 70px;
+    }
+    .mainmodal{
+        height: 250px;
+    }
+    footer{
+        font-size: 30px;
+    }
+}
+@media(max-width: 768px){
+    header{
+        height: 20px;
+    }
+    .logo{
+        font-size: 12px;
+    }
+    .switchtheme{
+        width: 40px;
+        height: 20px;
+    }
+    .switch::before{
+        width: 25px;
+        height: 25px;
+    }
+    input:checked + .switch::before{
+        transform: translateX(20px);
+    }
+    .buttonaddserver{
+        padding: 10px;
+        font-size: 10px;
+    }
+    .searchdiv input{
+        height: 20px;
+        font-size: 12px;
+    }
+    #sorted{
+        font-size: 10px;
+    }
+    .servercard img{
+        width: 32px;
+        height: 32px;
+    }
+    .nameserver{
+        font-size: 10px;
+    }
+    .status{
+        font-size: 10px;
+        height: 60px;
+        width: 300px;
+        gap: 2px;
+    }
+    .servercard{
+        height: 100px;
+        width: 275px;
+    }
+    .online{
+        width: 8px;
+        height: 8px;
+    }
+    main{
+        width: 350px;
+    }
+    .div-buttons{
+        gap: 4px;
+    }
+    .version-text{
+        font-size: 8px;
+    }
+    .update-button,.delete-button{
+        font-size: 8px;
+        padding: 2px;
+        height: 20px;
+    }
+    .ip{
+        height: 60px;
+        font-size: 12px;
+    }
+    .exit{
+        font-size: 12px;
+    }
+    .buttonmodal{
+        font-size: 12px;
+        height: 50px;
+    }
+    footer{
+        font-size: 12px;
+    }
+}
